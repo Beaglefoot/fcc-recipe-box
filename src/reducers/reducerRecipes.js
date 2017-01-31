@@ -1,3 +1,5 @@
+import { CREATE_RECIPE } from '../actions';
+
 const INITIAL_STATE = {
   all: [
     {
@@ -14,7 +16,15 @@ const INITIAL_STATE = {
 };
 
 export default function(state = INITIAL_STATE, action) {
+  if (!action) return state;
+
   switch(action.type) {
+  case CREATE_RECIPE:
+    return Object.assign(
+      {},
+      state,
+      { all: state.all.concat(action.recipe) }
+    );
   default:
     return state;
   }
