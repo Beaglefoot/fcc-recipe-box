@@ -1,22 +1,17 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
-import { chooseRecipe } from '../actions';
 
 class RecipeShow extends React.Component {
-  componentDidMount() {
-    const { chooseRecipe, recipes, routeParams } = this.props;
-    const id = parseInt(routeParams.id);
-
-    chooseRecipe(recipes.find(recipe => recipe.id === id));
-  }
-
   render() {
-    if (!this.props.chosenRecipe) {
-      return <div>Loading...</div>;
+    if (!this.chosenRecipe) {
+      const { recipes, routeParams } = this.props;
+      const id = parseInt(routeParams.id);
+
+      this.chosenRecipe = recipes.find(recipe => recipe.id === id);
     }
 
-    const { name, ingredients } = this.props.chosenRecipe;
+    const { name, ingredients } = this.chosenRecipe;
     return (
       <div>
         <h3>{name}</h3>
@@ -28,10 +23,7 @@ class RecipeShow extends React.Component {
 }
 
 function mapStateToProps({ recipes }) {
-  return {
-    recipes: recipes.all,
-    chosenRecipe: recipes.chosenRecipe
-  };
+  return { recipes: recipes.all };
 }
 
-export default connect(mapStateToProps, { chooseRecipe })(RecipeShow);
+export default connect(mapStateToProps)(RecipeShow);
