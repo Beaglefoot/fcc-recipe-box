@@ -15,6 +15,14 @@ const INITIAL_STATE = {
   ]
 };
 
+function getNewID(state) {
+  return state.all.slice(-1)[0].id + 1;
+}
+
+function getRecipeWithNewID(recipe, state) {
+  return Object.assign({}, recipe, { id: getNewID(state) });
+}
+
 export default function(state = INITIAL_STATE, action) {
   if (!action) return state;
 
@@ -23,7 +31,7 @@ export default function(state = INITIAL_STATE, action) {
     return Object.assign(
       {},
       state,
-      { all: state.all.concat(action.recipe) }
+      { all: state.all.concat(getRecipeWithNewID(action.recipe, state)) }
     );
   default:
     return state;

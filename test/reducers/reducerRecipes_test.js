@@ -12,7 +12,7 @@ describe('reducerRecipes', () => {
       all: [{
         name: 'Pie',
         ingredients: 'flour',
-        id: 1
+        id: 8
       }]
     };
 
@@ -21,7 +21,6 @@ describe('reducerRecipes', () => {
       recipe: {
         name: 'Salad',
         ingredients: 'tomatoes',
-        id: 3
       }
     };
 
@@ -32,12 +31,12 @@ describe('reducerRecipes', () => {
         {
           name: 'Pie',
           ingredients: 'flour',
-          id: 1
+          id: 8
         },
         {
           name: 'Salad',
           ingredients: 'tomatoes',
-          id: 3
+          id: 9
         }
       ]
     });
