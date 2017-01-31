@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
-import { chooseRecipe } from '../actions';
 
 class RecipeList extends React.Component {
   renderRecipes() {
@@ -10,7 +9,7 @@ class RecipeList extends React.Component {
         key={recipe.id}
         className="list-group-item"
       >
-        <Link to={`recipe/${recipe.id}`} onClick={() => this.props.chooseRecipe(recipe)}>{recipe.name}</Link>
+        <Link to={`recipe/${recipe.id}`}>{recipe.name}</Link>
       </li>
     ));
   }
@@ -36,4 +35,4 @@ function mapStateToProps({ recipes }) {
   return { recipes: recipes.all };
 }
 
-export default connect(mapStateToProps, { chooseRecipe })(RecipeList);
+export default connect(mapStateToProps)(RecipeList);
