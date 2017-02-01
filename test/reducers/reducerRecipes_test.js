@@ -41,4 +41,41 @@ describe('reducerRecipes', () => {
       ]
     });
   });
+
+  it('should create recipe with a valid ID', () => {
+    const initialState = {
+      all: [
+        {
+          name: 'Pie',
+          ingredients: 'flour',
+          id: 2
+        },
+        {
+          name: 'Salad',
+          ingredients: 'tomatoes',
+          id: 1
+        }
+      ]
+    };
+
+    const action = {
+      type: CREATE_RECIPE,
+      recipe: {
+        name: 'Pasta',
+        ingredients: 'macaroni',
+      }
+    };
+
+    const finalState = reducer(initialState, action);
+    const newRecipeID = finalState.all.find(recipe => (
+      recipe.name === 'Pasta'
+    )).id;
+    console.log(newRecipeID);
+
+    expect(
+      initialState.all
+      .map(recipe => recipe.id)
+      .includes(newRecipeID)
+    ).to.not.equal(true);
+  });
 });

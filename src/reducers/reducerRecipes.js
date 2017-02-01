@@ -16,7 +16,9 @@ const INITIAL_STATE = {
 };
 
 function getNewID(state) {
-  return state.all.slice(-1)[0].id + 1;
+  return state.all.reduce((maxID, e) => (
+    e.id > maxID ? e.id : maxID
+  ), 0) + 1;
 }
 
 function getRecipeWithNewID(recipe, state) {
