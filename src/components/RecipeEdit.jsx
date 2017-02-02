@@ -17,7 +17,7 @@ class RecipeEdit extends React.Component {
   }
 
   render() {
-    const { handleSubmit, submitting } = this.props;
+    const { handleSubmit } = this.props;
 
     return (
       <form onSubmit={handleSubmit(props => this.onSubmit(props))}>
@@ -42,7 +42,7 @@ class RecipeEdit extends React.Component {
           />
         </div>
 
-        <button className="btn btn-primary" type="submit" disabled={submitting}>Submit</button>
+        <button className="btn btn-primary" type="submit">Submit</button>
         <Link to="/" className="btn btn-danger">Cancel</Link>
       </form>
     );
