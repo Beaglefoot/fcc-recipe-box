@@ -70,7 +70,6 @@ describe('reducerRecipes', () => {
     const newRecipeID = finalState.all.find(recipe => (
       recipe.name === 'Pasta'
     )).id;
-    console.log(newRecipeID);
 
     expect(
       initialState.all
