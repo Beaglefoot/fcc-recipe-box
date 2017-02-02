@@ -12,7 +12,8 @@ class RecipeEdit extends React.Component {
   }
 
   onSubmit(props) {
-    this.props.replaceRecipe(props);
+    const id = parseInt(this.props.routeParams.id);
+    this.props.replaceRecipe(Object.assign({}, props, { id }));
     browserHistory.push('/');
   }
 
