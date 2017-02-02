@@ -1,4 +1,4 @@
-import { CREATE_RECIPE } from '../actions';
+import { CREATE_RECIPE, DELETE_RECIPE, REPLACE_RECIPE } from '../actions';
 
 const INITIAL_STATE = {
   all: [
@@ -21,8 +21,26 @@ function getNewID(state) {
   ), 0) + 1;
 }
 
-function getRecipeWithNewID(recipe, state) {
+function getRecipeWithNewID(state, recipe) {
   return Object.assign({}, recipe, { id: getNewID(state) });
+}
+
+function createRecipe(state, recipe) {
+  return Object.assign(
+    {},
+    state,
+    { all: state.all.concat(
+      recipe.id ? recipe : getRecipeWithNewID(state, recipe)
+    ) }
+  );
+}
+
+function deleteRecipe(state, id) {
+  return Object.assign(
+    {},
+    state,
+    { all: state.all.filter(recipe => recipe.id !== id) }
+  );
 }
 
 export default function(state = INITIAL_STATE, action) {
@@ -30,11 +48,11 @@ export default function(state = INITIAL_STATE, action) {
 
   switch(action.type) {
   case CREATE_RECIPE:
-    return Object.assign(
-      {},
-      state,
-      { all: state.all.concat(getRecipeWithNewID(action.recipe, state)) }
-    );
+    return createRecipe(state, action.recipe);
+  case DELETE_RECIPE:
+    return deleteRecipe(state, action.id);
+  case REPLACE_RECIPE:
+    return createRecipe(deleteRecipe(state, action.recipe.id), action.recipe);
   default:
     return state;
   }

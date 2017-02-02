@@ -1,5 +1,6 @@
 export const CREATE_RECIPE = 'CREATE_RECIPE';
-export const EDIT_RECIPE = 'EDIT_RECIPE';
+export const REPLACE_RECIPE = 'REPLACE_RECIPE';
+export const DELETE_RECIPE = 'DELETE_RECIPE';
 
 export function createRecipe(recipe) {
   return {
@@ -8,9 +9,16 @@ export function createRecipe(recipe) {
   };
 }
 
-export function editRecipe(recipe) {
+export function replaceRecipe(recipe) {
   return {
-    type: EDIT_RECIPE,
+    type: REPLACE_RECIPE,
     recipe
+  };
+}
+
+export function deleteRecipe(id) {
+  return {
+    type: DELETE_RECIPE,
+    id
   };
 }

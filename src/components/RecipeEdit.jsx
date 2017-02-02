@@ -2,7 +2,7 @@ import React from 'react';
 import { Link, browserHistory } from 'react-router';
 import { connect } from 'react-redux';
 import { reduxForm, Field } from 'redux-form';
-import { createRecipe } from '../actions';
+import { replaceRecipe } from '../actions';
 import RenderField from './RenderField';
 import { chooseRecipeOnMount } from './RecipeShow';
 
@@ -12,7 +12,7 @@ class RecipeEdit extends React.Component {
   }
 
   onSubmit(props) {
-    this.props.createRecipe(props);
+    this.props.replaceRecipe(props);
     browserHistory.push('/');
   }
 
@@ -67,4 +67,4 @@ function mapStateToProps({ recipes }) {
   return { recipes: recipes.all };
 }
 
-export default connect(mapStateToProps, { createRecipe })(RecipeEditDecorated);
+export default connect(mapStateToProps, { replaceRecipe })(RecipeEditDecorated);
