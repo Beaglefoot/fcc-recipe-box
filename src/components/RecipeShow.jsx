@@ -2,21 +2,29 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link, browserHistory } from 'react-router';
 
-export function findRecipe(recipes, id) {
-  return recipes.find(recipe => recipe.id === id);
+function findRecipe(recipes, id) {
+  return recipes.find(recipe => recipe.id === id) || '';
+}
+
+export function chooseRecipeOnMount(props) {
+  const { recipes, routeParams } = props;
+  const id = parseInt(routeParams.id);
+  const chosenRecipe = findRecipe(recipes, id);
+
+  chosenRecipe || browserHistory.push('/');
+
+  return chosenRecipe;
 }
 
 class RecipeShow extends React.Component {
   componentWillMount() {
-    const { recipes, routeParams } = this.props;
-    const id = parseInt(routeParams.id);
-
-    this.chosenRecipe =  findRecipe(recipes, id) || '';
-    this.chosenRecipe || browserHistory.push('/');
+    this.chosenRecipe = chooseRecipeOnMount(this.props);
   }
 
   render() {
+    console.log(`${this.props.location.pathname}`);
     const { name, ingredients } = this.chosenRecipe;
+
     return (
       <div>
         <h3>{name}</h3>

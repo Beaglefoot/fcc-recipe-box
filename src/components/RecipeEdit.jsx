@@ -4,17 +4,20 @@ import { connect } from 'react-redux';
 import { reduxForm, Field } from 'redux-form';
 import { createRecipe } from '../actions';
 import RenderField from './RenderField';
-import { findRecipe } from './RecipeShow';
+import { chooseRecipeOnMount } from './RecipeShow';
 
 class RecipeEdit extends React.Component {
+  componentWillMount() {
+    this.chosenRecipe = chooseRecipeOnMount(this.props);
+  }
+
   onSubmit(props) {
     this.props.createRecipe(props);
     browserHistory.push('/');
   }
 
   render() {
-    const { handleSubmit, submitting, routeParams: { id }, recipes} = this.props;
-    const currentRecipe = findRecipe(recipes, parseInt(id));
+    const { handleSubmit, submitting } = this.props;
 
     return (
       <form onSubmit={handleSubmit(props => this.onSubmit(props))}>
@@ -25,7 +28,7 @@ class RecipeEdit extends React.Component {
             name="name"
             type="text"
             label="Name"
-            content={currentRecipe.name}
+            content={this.chosenRecipe.name}
           />
         </div>
         <div className="form-group">
@@ -35,7 +38,7 @@ class RecipeEdit extends React.Component {
             type="text"
             multiRow="true"
             label="Ingredients"
-            content={currentRecipe.ingredients}
+            content={this.chosenRecipe.ingredients}
           />
         </div>
 
