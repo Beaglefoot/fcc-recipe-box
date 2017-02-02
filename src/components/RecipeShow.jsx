@@ -1,16 +1,21 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router';
+import { Link, browserHistory } from 'react-router';
 
 class RecipeShow extends React.Component {
+  componentWillMount() {
+    const { recipes, routeParams } = this.props;
+    const id = parseInt(routeParams.id);
+
+    this.chosenRecipe = recipes.find(recipe => recipe.id === id) || '';
+    this.chosenRecipe || browserHistory.push('/');
+  }
+
+  // shouldComponentUpdate() {
+  //   return this.state.chosenRecipe;
+  // }
+
   render() {
-    if (!this.chosenRecipe) {
-      const { recipes, routeParams } = this.props;
-      const id = parseInt(routeParams.id);
-
-      this.chosenRecipe = recipes.find(recipe => recipe.id === id);
-    }
-
     const { name, ingredients } = this.chosenRecipe;
     return (
       <div>
