@@ -31,12 +31,16 @@ module.exports = {
       {
         test: /\.s[ac]ss$/,
         loader: 'style!css!sass'
+      },
+      {
+        test: /\.json$/,
+        loader: 'json'
       }
     ]
   },
 
   resolve: {
-    extensions: ['', '.js', '.jsx']
+    extensions: ['', '.js', '.jsx', '.json']
   },
 
   plugins: [

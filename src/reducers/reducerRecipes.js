@@ -1,19 +1,5 @@
 import { CREATE_RECIPE, DELETE_RECIPE, REPLACE_RECIPE } from '../actions';
-
-const INITIAL_STATE = {
-  all: [
-    {
-      name: 'Pie',
-      ingredients: 'flour',
-      id: 1
-    },
-    {
-      name: 'Soup',
-      ingredients: 'water',
-      id: 2
-    }
-  ]
-};
+import INITIAL_STATE from '../defaultRecipes';
 
 function getNewID(state) {
   return state.all.reduce((maxID, e) => (
