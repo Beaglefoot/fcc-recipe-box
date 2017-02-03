@@ -6,9 +6,17 @@ import { replaceRecipe } from '../actions';
 import RenderField from './RenderField';
 import { chooseRecipeOnMount } from './RecipeShow';
 
+const checkValueExistence = value => value ? undefined : 'Required';
+
 class RecipeEdit extends React.Component {
   componentWillMount() {
     this.chosenRecipe = chooseRecipeOnMount(this.props);
+  }
+
+  componentDidMount() {
+    // Assign default values for redux-form,
+    // which will be used on validation
+    this.props.initialize(this.chosenRecipe);
   }
 
   onSubmit(props) {
@@ -30,6 +38,7 @@ class RecipeEdit extends React.Component {
             type="text"
             label="Name"
             content={this.chosenRecipe.name}
+            validate={checkValueExistence}
           />
         </div>
         <div className="form-group">
@@ -40,6 +49,7 @@ class RecipeEdit extends React.Component {
             multiRow="true"
             label="Ingredients"
             content={this.chosenRecipe.ingredients}
+            validate={checkValueExistence}
           />
         </div>
 
@@ -50,18 +60,8 @@ class RecipeEdit extends React.Component {
   }
 }
 
-function validate(values) {
-  const errors = {};
-
-  if (!values.name) errors.name = 'Enter a recipe name';
-  if (!values.ingredients) errors.ingredients = 'Enter some ingredients';
-
-  return errors;
-}
-
 const RecipeEditDecorated = reduxForm({
-  form: 'RecipeEditForm',
-  validate
+  form: 'RecipeEditForm'
 })(RecipeEdit);
 
 function mapStateToProps({ recipes }) {
