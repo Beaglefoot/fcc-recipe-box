@@ -8,7 +8,18 @@ import combinedReducer from './reducers';
 
 require('./css/style.scss');
 
-const store = createStore(combinedReducer);
+function getRecipesFromLocalStorage() {
+  const recipesObj = JSON.parse(localStorage.getItem('recipes'));
+  return recipesObj ? { recipes: recipesObj } : undefined;
+}
+
+const store = createStore(combinedReducer, getRecipesFromLocalStorage());
+
+// Sync recipes in store and localStorage
+store.subscribe(() => {
+  const recipesAsString = JSON.stringify(store.getState().recipes);
+  localStorage.setItem('recipes', recipesAsString);
+});
 
 ReactDOM.render(
   <Provider store={store}>
