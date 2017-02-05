@@ -19,6 +19,7 @@
     "chai": "^3.5.0",
     "css-loader": "^0.26.1",
     "enzyme": "^2.7.0",
+    "file-loader": "^0.10.0",
     "html-webpack-plugin": "^2.26.0",
     "jsdom": "^9.9.1",
     "json-loader": "^0.5.4",
@@ -29,10 +30,12 @@
     "sass-loader": "^4.1.1",
     "sinon": "^1.17.7",
     "style-loader": "^0.13.1",
+    "url-loader": "^0.5.7",
     "webpack": "^1.14.0",
     "webpack-dev-server": "^1.16.2"
   },
   "dependencies": {
+    "bootstrap-sass": "^3.3.7",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
     "react-redux": "^5.0.2",
