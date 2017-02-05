@@ -19,9 +19,9 @@ class RecipeEdit extends React.Component {
     this.props.initialize(this.chosenRecipe);
   }
 
-  onSubmit(props) {
+  onSubmit(data) {
     const id = parseInt(this.props.routeParams.id);
-    this.props.replaceRecipe(Object.assign({}, props, { id }));
+    this.props.replaceRecipe(Object.assign({}, data, { id }));
     browserHistory.push('/');
   }
 
@@ -29,7 +29,7 @@ class RecipeEdit extends React.Component {
     const { handleSubmit } = this.props;
 
     return (
-      <form onSubmit={handleSubmit(props => this.onSubmit(props))}>
+      <form onSubmit={handleSubmit(data => this.onSubmit(data))}>
         <h3 className="text-center">Edit Recipe</h3>
         <div className="form-group">
           <Field
@@ -37,7 +37,6 @@ class RecipeEdit extends React.Component {
             name="name"
             type="text"
             label="Name"
-            content={this.chosenRecipe.name}
             validate={checkValueExistence}
           />
         </div>
@@ -48,7 +47,6 @@ class RecipeEdit extends React.Component {
             type="text"
             multiRow="true"
             label="Ingredients"
-            content={this.chosenRecipe.ingredients}
             validate={checkValueExistence}
           />
         </div>
