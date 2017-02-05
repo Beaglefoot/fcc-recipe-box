@@ -29,13 +29,23 @@ class RecipeShow extends React.Component {
     browserHistory.push('/');
   }
 
+  splitList(items) {
+    return (
+      <ul className="list-group">
+        {items.split(/, ?/).map((item, index) => (
+          <li key={index} className="list-group-item">{item}</li>
+        ))}
+      </ul>
+    );
+  }
+
   render() {
     const { name, ingredients } = this.chosenRecipe;
 
     return (
       <div>
         <h3>{name}</h3>
-        <p>{ingredients}</p>
+        {this.splitList(ingredients)}
         <Link to={`${location.pathname}/edit`} className="btn btn-warning">Edit</Link>
         <button
           className="btn btn-danger"
