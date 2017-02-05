@@ -51,8 +51,10 @@ class RecipeEdit extends React.Component {
           />
         </div>
 
-        <button className="btn btn-primary" type="submit">Submit</button>
-        <Link to="/" className="btn btn-danger">Cancel</Link>
+        <div className="pull-right">
+          <button className="btn btn-primary" type="submit">Submit</button>
+          <Link to="/" className="btn btn-danger">Cancel</Link>
+        </div>
       </form>
     );
   }

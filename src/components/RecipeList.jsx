@@ -5,27 +5,28 @@ import { connect } from 'react-redux';
 class RecipeList extends React.Component {
   renderRecipes() {
     return this.props.recipes.map(recipe => (
-      <li
+      <Link
         key={recipe.id}
+        type="button"
         className="list-group-item"
+        to={`recipe/${recipe.id}`}
       >
-        <Link to={`recipe/${recipe.id}`}>{recipe.name}</Link>
-      </li>
+        <span className="badge">{recipe.ingredients.split(/, ?/).length}</span>
+        {recipe.name}
+      </Link>
     ));
   }
 
   render() {
     return (
       <div>
-        <div>
-          <Link to="recipe/new" className="btn btn-primary">
-            Add Recipe
-          </Link>
-        </div>
-        <h2>Mock recipes</h2>
-        <ul className="list-group">
+        <h2>Recipe List</h2>
+        <div className="list-group">
           {this.renderRecipes()}
-        </ul>
+        </div>
+        <Link to="recipe/new" className="btn btn-primary pull-right">
+          Add Recipe
+        </Link>
       </div>
     );
   }

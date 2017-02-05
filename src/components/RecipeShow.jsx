@@ -46,14 +46,16 @@ class RecipeShow extends React.Component {
       <div>
         <h3>{name}</h3>
         {this.splitList(ingredients)}
-        <Link to={`${location.pathname}/edit`} className="btn btn-warning">Edit</Link>
-        <button
-          className="btn btn-danger"
-          onClick={() => this.handleClick(this.chosenRecipe.id)}
-        >
-          Delete
-        </button>
-        <Link to="/" className="btn btn-default">Back To Recipe List</Link>
+        <div className="pull-right">
+          <Link to={`${location.pathname}/edit`} className="btn btn-warning">Edit</Link>
+          <button
+            className="btn btn-danger"
+            onClick={() => this.handleClick(this.chosenRecipe.id)}
+          >
+            Delete
+          </button>
+          <Link to="/" className="btn btn-default">Back To Recipe List</Link>
+        </div>
       </div>
     );
   }
