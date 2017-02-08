@@ -1,6 +1,6 @@
 import React from 'react';
 
-require('../css/Signature.scss');
+import '../css/Signature.scss';
 
 export default class Signature extends React.Component {
   render() {

@@ -6,8 +6,8 @@ import { Router, browserHistory } from 'react-router';
 import routes from './routes';
 import combinedReducer from './reducers';
 
-require('bootstrap-sass/assets/stylesheets/_bootstrap.scss');
-require('./css/style.scss');
+import 'bootstrap-sass/assets/stylesheets/_bootstrap.scss';
+import './css/style.scss';
 
 function getRecipesFromLocalStorage() {
   const recipesObj = JSON.parse(localStorage.getItem('recipes'));
