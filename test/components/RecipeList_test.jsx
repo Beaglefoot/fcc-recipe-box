@@ -6,10 +6,12 @@ import { createStore } from 'redux';
 import { deleteRecipe } from '../../src/actions';
 import reducer from '../../src/reducers';
 import RecipeList from '../../src/components/RecipeList';
+import { getButtonFactory } from '../utility_functions';
 
 describe('<RecipeList />', () => {
   let store = createStore(reducer);
   let item;
+  let getButton = () => {};
 
   beforeEach(() => {
     item = mount(
@@ -17,6 +19,8 @@ describe('<RecipeList />', () => {
         <RecipeList />
       </Provider>
     );
+
+    getButton = getButtonFactory(item);
   });
 
   it('should render', () => {
@@ -34,8 +38,6 @@ describe('<RecipeList />', () => {
   });
 
   it('should have Add button', () => {
-    expect(item.findWhere(el => (
-      (el.type() === 'a' || el.type() === 'button') && el.text() === 'Add Recipe'
-    )).first()).to.exist;
+    expect(getButton('Add Recipe').exists()).to.be.true;
   });
 });

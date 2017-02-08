@@ -5,11 +5,12 @@ import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import reducer from '../../src/reducers';
 import RecipeEdit from '../../src/components/RecipeEdit';
-import { getRecipesStateFactory } from '../utility_functions';
+import { getRecipesStateFactory, getButtonFactory } from '../utility_functions';
 
 describe('<RecipeEdit />', () => {
   let store = createStore(reducer);
   let item;
+  let getButton = () => {};
 
   const getRecipesState = getRecipesStateFactory(store);
 
@@ -19,6 +20,8 @@ describe('<RecipeEdit />', () => {
         <RecipeEdit routeParams={{ id: 5 }}/>
       </Provider>
     );
+
+    getButton = getButtonFactory(item);
   });
 
   it('should render', () => {
@@ -35,15 +38,11 @@ describe('<RecipeEdit />', () => {
   });
 
   it('should have Cancel button', () => {
-    expect(item.findWhere(el => (
-      (el.type() === 'a' || el.type() === 'button') && el.text() === 'Cancel'
-    )).first()).to.exist;
+    expect(getButton('Cancel').exists()).to.be.true;
   });
 
   it('should have Submit button', () => {
-    expect(item.findWhere(el => (
-      (el.type() === 'a' || el.type() === 'button') && el.text() === 'Submit'
-    )).first()).to.exist;
+    expect(getButton('Submit').exists()).to.be.true;
   });
 
   it('should change recipes state on changed recipe 5 submit', () => {
@@ -58,5 +57,8 @@ describe('<RecipeEdit />', () => {
 
     expect(initialRecipe).not.to.deep.equal(finalRecipe);
     expect(finalRecipe.name).to.equal('New Recipe');
+
+    // Return to default store state
+    store = createStore(reducer);
   });
 });

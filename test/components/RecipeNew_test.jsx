@@ -5,11 +5,12 @@ import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 import reducer from '../../src/reducers';
 import RecipeNew from '../../src/components/RecipeNew';
-import { getRecipesStateFactory } from '../utility_functions';
+import { getRecipesStateFactory, getButtonFactory } from '../utility_functions';
 
 describe('<RecipeNew />', () => {
   let store = createStore(reducer);
   let item;
+  let getButton = () => {};
 
   const getRecipesState = getRecipesStateFactory(store);
 
@@ -19,6 +20,8 @@ describe('<RecipeNew />', () => {
         <RecipeNew />
       </Provider>
     );
+
+    getButton = getButtonFactory(item);
   });
 
   it('should render', () => {
@@ -31,6 +34,14 @@ describe('<RecipeNew />', () => {
 
   it('should have textare field with name "ingredients"', () => {
     expect(item.find('textarea [name="ingredients"]').first()).to.exist;
+  });
+
+  it('should have Cancel button', () => {
+    expect(getButton('Cancel').exists()).to.be.true;
+  });
+
+  it('should have Submit button', () => {
+    expect(getButton('Submit').exists()).to.be.true;
   });
 
   it('should add recipe to store on submitting new data', () => {

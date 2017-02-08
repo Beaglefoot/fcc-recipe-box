@@ -5,11 +5,12 @@ import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import reducer from '../../src/reducers';
 import RecipeShow from '../../src/components/RecipeShow';
-import { getRecipesStateFactory } from '../utility_functions';
+import { getRecipesStateFactory, getButtonFactory } from '../utility_functions';
 
 describe('<RecipeShow />', () => {
   let store = createStore(reducer);
   let item;
+  let getButton = () => {};
 
   const getRecipesState = getRecipesStateFactory(store);
 
@@ -19,7 +20,10 @@ describe('<RecipeShow />', () => {
         <RecipeShow routeParams={{ id: 5 }}/>
       </Provider>
     );
+
+    getButton = getButtonFactory(item);
   });
+
 
   it('should render', () => {
     expect(item).to.exist;
@@ -31,21 +35,15 @@ describe('<RecipeShow />', () => {
   });
 
   it('should have Edit button', () => {
-    expect(item.findWhere(el => (
-      (el.type() === 'a' || el.type() === 'button') && el.text() === 'Edit'
-    )).first()).to.exist;
+    expect(getButton('Edit').exists()).to.be.true;
   });
 
   it('should have Delete button', () => {
-    expect(item.findWhere(el => (
-      (el.type() === 'a' || el.type() === 'button') && el.text() === 'Delete'
-    )).first()).to.exist;
+    expect(getButton('Delete').exists()).to.be.true;
   });
 
   it('should have Back To Recipe List button', () => {
-    expect(item.findWhere(el => (
-      (el.type() === 'a' || el.type() === 'button') && el.text() === 'Back To Recipe List'
-    )).first()).to.exist;
+    expect(getButton('Back To Recipe List').exists()).to.be.true;
   });
 
   it('should delete recipe on Delete button click', () => {
