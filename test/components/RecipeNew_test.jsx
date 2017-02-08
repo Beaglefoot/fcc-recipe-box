@@ -5,10 +5,13 @@ import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 import reducer from '../../src/reducers';
 import RecipeNew from '../../src/components/RecipeNew';
+import { getRecipesStateFactory } from '../utility_functions';
 
 describe('<RecipeNew />', () => {
   let store = createStore(reducer);
   let item;
+
+  const getRecipesState = getRecipesStateFactory(store);
 
   beforeEach(() => {
     item = mount(
@@ -34,13 +37,13 @@ describe('<RecipeNew />', () => {
     const wrappedInput = item.find('input [name="name"]').first();
     const wrappedTextArea = item.find('textarea [name="ingredients"]').first();
     const wrappedForm = item.find('form').first();
-    const initialStateRecipes = store.getState().recipes.all;
+    const initialStateRecipes = getRecipesState();
 
     wrappedInput.simulate('change', { target: { value: 'New Recipe' }});
     wrappedTextArea.simulate('change', { target: { value: 'some ingredients' }});
     wrappedForm.simulate('submit');
 
-    const finalStateRecipes = store.getState().recipes.all;
+    const finalStateRecipes = getRecipesState();
 
     expect(finalStateRecipes.length - initialStateRecipes.length).to.equal(1);
     expect(finalStateRecipes.some(recipe => (

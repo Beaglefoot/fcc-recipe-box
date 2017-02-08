@@ -32,4 +32,10 @@ describe('<RecipeList />', () => {
     expect(item.find('a [type="button"]')).to.have.lengthOf(4);
     store = createStore(reducer);
   });
+
+  it('should have Add button', () => {
+    expect(item.findWhere(el => (
+      (el.type() === 'a' || el.type() === 'button') && el.text() === 'Add Recipe'
+    )).first()).to.exist;
+  });
 });
