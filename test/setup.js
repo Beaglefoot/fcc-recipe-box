@@ -1,7 +1,7 @@
 import { jsdom } from 'jsdom';
 import moment from 'moment';
 
-global.document = jsdom('<!doctype html><html><body></body></html>');
+global.document = jsdom('<!doctype html><html><body></body></html>', { url: 'http://localhost/' });
 global.window = document.defaultView;
 
 Object.keys(window).forEach(key => {
