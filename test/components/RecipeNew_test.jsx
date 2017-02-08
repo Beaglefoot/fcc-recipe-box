@@ -27,6 +27,27 @@ describe('<RecipeNew />', () => {
   });
 
   it('should have textare field with name "ingredients"', () => {
-    expect(item.find('textare [name="ingredients"]').first()).to.exist;
+    expect(item.find('textarea [name="ingredients"]').first()).to.exist;
+  });
+
+  it('should add recipe to store on submitting new data', () => {
+    const wrappedInput = item.find('input [name="name"]').first();
+    const wrappedTextArea = item.find('textarea [name="ingredients"]').first();
+    const wrappedForm = item.find('form').first();
+    const initialStateRecipes = store.getState().recipes.all;
+
+    wrappedInput.simulate('change', { target: { value: 'New Recipe' }});
+    wrappedTextArea.simulate('change', { target: { value: 'some ingredients' }});
+    wrappedForm.simulate('submit');
+
+    const finalStateRecipes = store.getState().recipes.all;
+
+    expect(finalStateRecipes.length - initialStateRecipes.length).to.equal(1);
+    expect(finalStateRecipes.some(recipe => (
+      recipe.name === 'New Recipe' && recipe.ingredients === 'some ingredients'
+    ))).to.be.true;
+
+    // Clean up to default store
+    store = createStore(reducer);
   });
 });
