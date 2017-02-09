@@ -9,7 +9,7 @@ class RecipeList extends React.Component {
         key={recipe.id}
         type="button"
         className="list-group-item"
-        to={`recipe/${recipe.id}`}
+        to={`/fcc-recipe-box/recipe/${recipe.id}`}
       >
         <span className="badge">{recipe.ingredients.split(/, ?/).length}</span>
         {recipe.name}
@@ -24,7 +24,7 @@ class RecipeList extends React.Component {
         <div className="list-group">
           {this.renderRecipes()}
         </div>
-        <Link to="recipe/new" className="btn btn-primary pull-right">
+        <Link to="/fcc-recipe-box/recipe/new" className="btn btn-primary pull-right">
           Add Recipe
         </Link>
       </div>

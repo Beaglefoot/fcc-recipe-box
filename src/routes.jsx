@@ -7,14 +7,14 @@ import RecipeShow from './components/RecipeShow';
 import RecipeEdit from './components/RecipeEdit';
 
 export default (
-  <Route path="/" component={App}>
-    <IndexRedirect to="fcc-recipe-box" />
-    <Route path="fcc-recipe-box">
+  <Route path="/">
+    <IndexRedirect to="fcc-recipe-box/" />
+    <Route path="fcc-recipe-box/" component={App}>
       <IndexRoute component={RecipeList} />
       <Route path="recipe/new" component={RecipeNew} />
       <Route path="recipe/:id" component={RecipeShow} />
       <Route path="recipe/:id/edit" component={RecipeEdit} />
     </Route>
-    {/* <Redirect from="*" to="/" /> */}
+    <Redirect from="*" to="fcc-recipe-box/" />
   </Route>
 );
