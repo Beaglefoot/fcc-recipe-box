@@ -9,14 +9,14 @@ var moduleConfig = require('./webpack.config.js');
 moduleConfig.entry =  './src/index.jsx';
 
 moduleConfig.output = {
-  path: path.resolve(__dirname),
+  path: path.resolve(__dirname, 'dist'),
   filename: 'bundle.js'
 };
 
 moduleConfig.plugins = [
   new HtmlWebpackPlugin({
     template: './src/index.html',
-    filename: 'index.html'
+    filename: '../index.html'
   }),
   new webpack.DefinePlugin({
     'process.env': {
